@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            ul{
+                text-align: center
+            }
+            li{
+                display: inline;
+                border-right: 2px solid black;
+                padding: 5px;
+            }      
+            li:last-child {
+                border-right: none;
+            }     
+           .wrapper {
+                text-align: center;
+           }
+           .button {
+                position: absolute;
+                top: 50%;
+            }
+            
+           
+        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>
+         indexpage   
+        </title>
+    </head>
+    <body>
+            <h1 align ="center" style ="font-size: 50px">Quotify</h1>
+            <ul>
+            <font size='5px'>
+            <li><a href="1-version.html">Random Quote (Api)</a></li>
+            <li><a href='3-version.html'>Random Quote(local)</a></li>
+            <li><a href ='4-version.html'>Add Quote</a></li>
+            <li><a href='5-version.html'>List All Quotes(local)</a></li></font>
+            </ul><br/><br/>
+            <div align="center">
+            <form >
+                <textarea  rows="5"cols ="50" id ="textarea"></textarea><br/><br/>
+                <input  type="text" size ="50" id ="author"/><br/><br/>
+                <input type="button" id ="savebtn" value ="save"/>
+            </form>
+            </div>
+            <script>
+                let quotation = {}
+                let localDB =JSON.parse(localStorage.getItem('quotes'))
+                textAreaHandle = document.getElementById('textarea')     
+                authorTextHandle = document.getElementById('author')
+                savebtnHandle = document.getElementById('savebtn')
+                //textarea event listener
+                textAreaHandle.addEventListener('keyup',function(){
+                    quotation.quote =  textAreaHandle.value
+                   
+                   
+                })
+                //author text event listener
+                authorTextHandle.addEventListener('keyup',function(){
+                    quotation.author = authorTextHandle.value
+                    
+                })
+                //save button event listener    
+                savebtnHandle.addEventListener('click',function(event){
+                    event.preventDefault()
+                    localDB.push(quotation)
+                    localStorage.setItem('quotes',JSON.stringify(localDB))  
+                    textAreaHandle.value='' 
+                    authorTextHandle.value=''  
+                })       
+            </script>
+    </body>
+</html>        
+                
+             
